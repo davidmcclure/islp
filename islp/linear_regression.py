@@ -15,8 +15,8 @@ class LinearRegression:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.m = None
-        self.b = None
+        self.m = 0
+        self.b = 0
 
     def least_squares(self):
 
@@ -31,6 +31,17 @@ class LinearRegression:
 
         self.m = rise / run
         self.b = mean_y - (self.m*mean_x)
+
+    @property
+    def rss(self):
+
+        rss = 0
+        for i, xi in enumerate(self.x):
+            y1 = self.m*xi + self.b
+            y2 = self.y[i]
+            rss += (y1-y2)**2
+
+        return rss
 
     def plot(self):
 
