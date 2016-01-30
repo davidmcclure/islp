@@ -6,6 +6,12 @@ import matplotlib.pyplot as plt
 
 class LinearRegression:
 
+    @classmethod
+    def from_line(cls, m=2, b=5, start=0, stop=100, num=100, scale=10):
+        x = np.linspace(start, stop, num)
+        y = np.random.normal(loc=m*x+b, scale=scale)
+        return cls(x, y)
+
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -27,5 +33,14 @@ class LinearRegression:
         self.b = mean_y - (self.m*mean_x)
 
     def plot(self):
+
+        x1 = np.min(self.x)
+        x2 = np.max(self.x)
+
+        y1 = self.m*x1 + self.b
+        y2 = self.m*x2 + self.b
+
         plt.scatter(self.x, self.y)
+        plt.plot([x1, x2], [y1, y2])
+
         plt.show()
