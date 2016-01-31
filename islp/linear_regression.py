@@ -23,14 +23,15 @@ class LinearRegression:
         mean_x = np.mean(self.x)
         mean_y = np.mean(self.y)
 
-        rise = 0
-        run  = 0
-        for i in range(len(self.x)):
-            rise += (self.x[i]-mean_x) * (self.y[i]-mean_y)
-            run  += (self.x[i]-mean_x)**2
+        mean_xy = np.mean(self.x * self.y)
+        mean_x2 = np.mean(self.x * self.x)
 
-        self.m = rise / run
-        self.b = mean_y - (self.m*mean_x)
+        self.m = (
+            (mean_y - (mean_xy / mean_x)) /
+            (mean_x - (mean_x2 / mean_x))
+        )
+
+        self.b = mean_y - (self.m * mean_x)
 
     @property
     def rss(self):
