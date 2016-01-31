@@ -13,10 +13,13 @@ class LinearRegression:
         return cls(x, y)
 
     def __init__(self, x, y):
+
         self.x = x
         self.y = y
         self.m = 0
         self.b = 0
+
+        self.least_squares()
 
     def least_squares(self):
 
@@ -43,6 +46,10 @@ class LinearRegression:
             rss += (y1-y2)**2
 
         return rss
+
+    @property
+    def rse(self):
+        return np.sqrt(self.rss / (len(self.x)-2))
 
     @property
     def sigma(self):
@@ -80,6 +87,15 @@ class LinearRegression:
             self.b + 2*self.se_b,
             self.b - 2*self.se_b,
         )
+
+    @property
+    def t_statistic(self):
+        return self.m / self.se_m
+
+    @property
+    def p_value(self):
+        # TODO: how to calculate this?
+        pass
 
     def plot(self):
 
