@@ -44,6 +44,43 @@ class LinearRegression:
 
         return rss
 
+    @property
+    def sigma(self):
+        return np.sqrt(self.rss / (len(self.x) - 2))
+
+    @property
+    def se_m(self):
+
+        mean_x = np.mean(self.x)
+
+        return (
+            self.sigma**2 /
+            np.sum((self.x - mean_x)**2)
+        )
+
+    @property
+    def se_b(self):
+
+        mean_x = np.mean(self.x)
+
+        return self.sigma**2 * (1/len(self.x) + (
+            mean_x**2 / np.sum((self.x - mean_x)**2)
+        ))
+
+    @property
+    def ci_m(self):
+        return (
+            self.m + 2*self.se_m,
+            self.m - 2*self.se_m,
+        )
+
+    @property
+    def ci_b(self):
+        return (
+            self.b + 2*self.se_b,
+            self.b - 2*self.se_b,
+        )
+
     def plot(self):
 
         x1 = np.min(self.x)
