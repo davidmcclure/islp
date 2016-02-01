@@ -2,6 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import stats
 
 
 class LinearRegression:
@@ -94,8 +95,16 @@ class LinearRegression:
 
     @property
     def p_value(self):
-        # TODO: how to calculate this?
-        pass
+        return stats.t.sf(self.t_statistic, 2) * 2
+
+    @property
+    def tss(self):
+        mean_y = np.mean(self.y)
+        return np.sum((self.y - mean_y)**2)
+
+    @property
+    def r_squared(self):
+        return 1 - (self.rss / self.tss)
 
     def plot(self):
 
