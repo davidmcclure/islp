@@ -1,19 +1,20 @@
 
 
 import matplotlib.pyplot as plt
-import numpy as np
 
 from sklearn.datasets.samples_generator import make_blobs
 
+
 # TODO
 # plot response colors
+# given x/y/k, predict a level
 
 
 class KNN_2d:
 
 
     @classmethod
-    def from_normal(cls):
+    def from_blobs(cls):
 
         X, y = make_blobs(
             n_samples=1000,
