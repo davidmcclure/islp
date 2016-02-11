@@ -3,23 +3,33 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+from sklearn.datasets.samples_generator import make_blobs
+
+# TODO
+# plot response colors
+
 
 class KNN_2d:
 
 
     @classmethod
     def from_normal(cls):
-        x = np.random.normal(loc=10, scale=2, size=50)
-        y = np.random.normal(loc=10, scale=2, size=50)
-        return cls(x, y, [])
+
+        X, y = make_blobs(
+            n_samples=1000,
+            centers=5,
+            cluster_std=1,
+            n_features=5,
+        )
+
+        return cls(X, y)
 
 
-    def __init__(self, x, y, labels):
-        self.x = x
+    def __init__(self, X, y):
+        self.X = X
         self.y = y
-        self.labels = labels
 
 
     def plot(self):
-        plt.scatter(self.x, self.y)
+        plt.scatter(self.X[:, 0], self.X[:, 1])
         plt.show()
